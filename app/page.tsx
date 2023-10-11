@@ -1,5 +1,10 @@
 import React from "react";
+import Dashbord from "./(pages)/dashbord/page";
 
 export default function Home() {
-  return <div className="text-red-500">hello world</div>;
+  return (
+    <main className="font-Rufina">
+      <Dashbord />
+    </main>
+  );
 }
