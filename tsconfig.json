@@ -22,6 +22,14 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "app/(pages)/restaurants/page.tsx",
+    "app/(pages)/_document.js",
+    "app/layout.jsx"
+  ],
   "exclude": ["node_modules"]
 }

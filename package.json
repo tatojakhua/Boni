@@ -7,10 +7,12 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "format": "prettier --write \"app/*.{js,jsx,ts,tsx}\""
+    "format": "prettier --write \"app/**/*.{js,jsx,ts,tsx}\" \"components/**/*.{js,jsx,ts,tsx}\""
   },
   "dependencies": {
-    "next": "13.5.4",
+    "antd": "^5.10.0",
+    "font": "^0.0.4",
+    "next": "^13.5.4",
     "react": "^18",
     "react-dom": "^18"
   },
