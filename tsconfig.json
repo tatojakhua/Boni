@@ -27,7 +27,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "app/(pages)/dashbord/page.jsx",
+    "app/(pages)/restaurants/page.tsx",
     "app/(pages)/_document.js",
     "app/layout.jsx"
   ],

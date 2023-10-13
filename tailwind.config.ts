@@ -15,7 +15,7 @@ const config: Config = {
       },
     },
     fontFamily: {
-      Rufina: ["var(--font-Rufina)"],
+      Noto_Serif_Georgian: ["var(--font-note-serif-georgian)"],
     },
   },
   plugins: [],

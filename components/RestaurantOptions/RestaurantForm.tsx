@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 import React from "react";
 import { Form, Button, Input } from "antd";
 
@@ -5,7 +7,6 @@ const onFinish = (values: string) => {
   console.log("Success:", values);
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const onFinishFailed = (errorInfo: any) => {
   console.log("Failed:", errorInfo);
 };
@@ -16,7 +17,13 @@ type FieldType = {
   city?: string;
 };
 
-const DashboardForm: React.FC = () => (
+type SetOpenModal = {
+  setopenModal: any;
+};
+
+const RestaurantForm: React.FC<SetOpenModal> = ({
+  setopenModal,
+}: SetOpenModal) => (
   <div className="p-4 border-2 border-red-500">
     <Form
       layout="vertical"
@@ -54,7 +61,13 @@ const DashboardForm: React.FC = () => (
       </Form.Item>
 
       <Form.Item className="mt-10">
-        <Button type="primary" danger ghost className="mr-[233px]">
+        <Button
+          type="primary"
+          danger
+          ghost
+          className="mr-[233px]"
+          onClick={() => setopenModal(false)}
+        >
           გამოსვლა
         </Button>
 
@@ -66,4 +79,4 @@ const DashboardForm: React.FC = () => (
   </div>
 );
 
-export default DashboardForm;
+export default RestaurantForm;
