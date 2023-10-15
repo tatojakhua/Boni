@@ -1,18 +1,45 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import { Input, Space, DatePicker } from "antd";
 import type { SearchProps } from "../Search";
+import { RangeValue } from "rc-picker/lib/interface";
+import dayjs from "dayjs";
 
 const { Search } = Input;
 const { RangePicker } = DatePicker;
 
-const onSearch: SearchProps["onSearch"] = (value: any) => console.log(value);
+const SearchOption: React.FC = () => {
+  const [searchValue, setSearchValue] = useState("");
+  const [dateRange, setDateRange] = useState<RangeValue<dayjs.Dayjs> | null>(
+    null
+  );
 
-const SearchOption: React.FC = () => (
-  <Space className="flex flex-col sm:flex-row border-2 border-blue-500">
-    <Search placeholder="მოძებნე რესტორანი" onSearch={onSearch} enterButton />
-    <RangePicker onChange={onSearch} />
-  </Space>
-);
+  const onSearch: SearchProps["onSearch"] = (value: any) => {
+    console.log(value);
+
+    const searchOptions = { searchValue, dateRange };
+    console.log(searchOptions);
+  };
+
+  return (
+    <Space className="flex flex-col sm:flex-row border-2 border-blue-500 bg-white text-black font-bold">
+      <Search
+        placeholder="მოძებნე რესტორანი"
+        onSearch={(value) => {
+          setSearchValue(value);
+          onSearch(value);
+        }}
+        enterButton
+      />
+      <RangePicker
+        onChange={(dates) => {
+          onSearch(searchValue);
+          setDateRange(dates);
+        }}
+      />
+    </Space>
+  );
+};
 
 export default SearchOption;

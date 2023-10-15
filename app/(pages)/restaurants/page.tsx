@@ -11,7 +11,7 @@ const Restaurants = () => {
 
   return (
     <>
-      <div className="flex flex-row justify-around items-center flex-wrap mt-auto py-10 border-2 border-red-600">
+      <div className="flex flex-col sm:flex-row justify-center sm:justify-between items-center px-16 py-6 border-2 border-red-600">
         <Search />
         <Button type="primary" ghost onClick={() => setopenModal(true)}>
           რესტორნის დამატება

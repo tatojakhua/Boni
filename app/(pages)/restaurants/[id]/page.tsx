@@ -10,7 +10,10 @@ const Page = () => {
   const router = useRouter();
   return (
     <div className="relative">
-      <Space direction="horizontal" className="border-2 border-red-500">
+      <Space
+        direction="horizontal"
+        className="w-full flex flex-row  justify-between items-center py-5 border-2 border-red-500"
+      >
         <Button type="primary" ghost onClick={() => router.back()}>
           უკან დაბრუნება
         </Button>

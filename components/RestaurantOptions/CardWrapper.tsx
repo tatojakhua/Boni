@@ -1,7 +1,6 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable react/prop-types */
 import React from "react";
 import CardItem from "./CardItem";
+// import CardLoader from "./CardLoader";
 
 const CardWrapper = () => {
   // if (error) {
