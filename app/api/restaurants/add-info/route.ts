@@ -1,6 +1,4 @@
-import { google } from "googleapis";
 import { NextResponse } from "next/server";
-import keys from "../../../../boni-test-1.json";
 import GoogleAuth from "../../ApiAuth";
 
 export async function POST(req: Request, res: any) {

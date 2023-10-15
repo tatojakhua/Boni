@@ -1,10 +1,8 @@
 import { NextResponse } from "next/server";
-import { google } from "googleapis";
-import keys from "../../../../boni-test-1.json";
-import GoogleAuth from "../../ApiAuth";
+import GoogleAuth from "../../../ApiAuth";
 
 export async function DELETE(req: Request, res: any) {
-  const { id } = await req.json();
+  const { id } = res.params;
   try {
     const gsapi = await GoogleAuth();
 
