@@ -1,13 +1,10 @@
 import { NextResponse } from "next/server";
-import { google } from "googleapis";
-import keys from "../../../../boni-test-1.json";
 import GoogleAuth from "../../ApiAuth";
 
-export async function POST(req: Request, res: any) {
+export async function POST(req: Request) {
   const { values } = await req.json();
   try {
     const gsapi = await GoogleAuth();
-
 
     // Specify the range to clear
     const rangeToUpdate = `restaurants!A${values.id}:C${values.id}`;

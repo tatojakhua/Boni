@@ -7,10 +7,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "format": "prettier --write \"app/**/*.{js,jsx,ts,tsx}\" \"components/**/*.{js,jsx,ts,tsx}\""
+    "format": "prettier --write \"app/**/*.{js,jsx,ts,tsx}\" \"components/**/*.{js,jsx,ts,tsx}\" \"utils/**/*.{js,jsx,ts,tsx}\" \"hooks/**/*.{js,jsx,ts,tsx}\" \"context/**/*.{js,jsx,ts,tsx}\""
   },
   "dependencies": {
     "antd": "^5.10.0",
+    "axios": "^1.5.1",
     "font": "^0.0.4",
     "googleapis": "^127.0.0",
     "next": "^13.5.4",

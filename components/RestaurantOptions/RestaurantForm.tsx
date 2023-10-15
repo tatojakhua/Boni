@@ -1,15 +1,11 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-import React from "react";
+import React, { useState } from "react";
 import { Form, Button, Input } from "antd";
-
-const onFinish = (values: string) => {
-  console.log("Success:", values);
-};
-
-const onFinishFailed = (errorInfo: any) => {
-  console.log("Failed:", errorInfo);
-};
+import API from "@/utils/API";
+import { useGlobalContext } from "@/context/global/GlobalContextProvider";
+import { apiRefresh } from "@/context/actions/actionCreators";
 
 type FieldType = {
   restaurantName?: string;
@@ -25,6 +21,17 @@ const RestaurantForm: React.FC<SetOpenModal> = ({
   setopenModal,
 }: SetOpenModal) => {
   const [form] = Form.useForm();
+  const [isLoading, setisLoading] = useState(false);
+  const { state, dispatch }: any = useGlobalContext();
+
+  const onFinish = async (values: string) => {
+    setisLoading(true);
+    await API.post("restaurants/add-info", { values });
+    setisLoading(false);
+    setopenModal(false);
+    dispatch(apiRefresh(!state.apiCallRefresh));
+  };
+
   return (
     <div className="p-4 border-2 border-red-500">
       <Form
@@ -32,7 +39,6 @@ const RestaurantForm: React.FC<SetOpenModal> = ({
         form={form}
         initialValues={{ layout: "vertical" }}
         onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
         autoComplete="off"
       >
         <Form.Item<FieldType>
@@ -63,18 +69,17 @@ const RestaurantForm: React.FC<SetOpenModal> = ({
           <Input />
         </Form.Item>
 
-        <Form.Item className="mt-10">
+        <Form.Item className="w-full flex flex-row  justify-between items-center mt-10  border-2 border-red-500">
           <Button
             type="primary"
             danger
             ghost
-            className="mr-[233px]"
             onClick={() => setopenModal(false)}
           >
             გამოსვლა
           </Button>
 
-          <Button htmlType="submit" type="primary" ghost>
+          <Button htmlType="submit" type="primary" ghost loading={isLoading}>
             დამატება
           </Button>
         </Form.Item>
