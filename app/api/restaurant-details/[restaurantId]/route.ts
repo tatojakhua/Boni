@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextResponse } from "next/server";
 import GoogleAuth from "../../ApiAuth";
 import dayjs from "dayjs";
@@ -76,7 +77,7 @@ export async function GET(req: Request, res: any) {
         (value: any, index: number) => ({
           id: value.id,
           driverName: value.driverName,
-          bottleType: extractedValuesB[index],
+          typeOfBottle: extractedValuesB[index],
           quantity: parseInt(extractedValuesC[index]),
           date: extractedValuesD[index],
           restaurantId: parseInt(extractedValuesE[index]),
@@ -92,7 +93,6 @@ export async function GET(req: Request, res: any) {
       return NextResponse.json("Invalid data structure", { status: 400 });
     }
   } catch (error) {
-    console.log(error);
     return NextResponse.json("Something Wrong", { status: 400 });
   }
 }
@@ -112,7 +112,7 @@ export async function POST(req: Request, res: any) {
         values: [
           [
             values.driverName,
-            values.bottleType,
+            values.typeOfBottle,
             values.quantity,
             dayjs(values.date).format("YYYY-DD-MM"),
             restaurantId,
@@ -122,7 +122,6 @@ export async function POST(req: Request, res: any) {
     });
     return NextResponse.json("Detail Added", { status: 201 });
   } catch (error) {
-    console.log(error);
     return NextResponse.json("Something Went Wrong", { status: 400 });
   }
 }

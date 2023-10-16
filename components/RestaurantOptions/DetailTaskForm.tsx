@@ -1,22 +1,51 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from "react";
+import React, { useState } from "react";
 import { Button, DatePicker, Form, Input, Select } from "antd";
+import API from "@/utils/API";
+import { useParams } from "next/navigation";
+import { useGlobalContext } from "@/context/global/GlobalContextProvider";
+import { apiRefresh } from "@/context/actions/actionCreators";
+import dayjs from "dayjs";
 
 type SetOpenModal = {
   setopenModal: any;
+  setopenModal2: any;
+  data: any;
 };
 
 const DetailTaskForm: React.FC<SetOpenModal> = ({
   setopenModal,
+  setopenModal2,
+  data,
 }: SetOpenModal) => {
+  const [isLoading, setisLoading] = useState(false);
+  const { state, dispatch } = useGlobalContext();
   const [form] = Form.useForm();
-  const onFinish = (values: string) => console.log(values);
+  const { id } = useParams();
 
+  const onFinish = async (values: string) => {
+    if (data) {
+      setisLoading(true);
+      await API.put(`restaurant-details/edit-info/${data.id}`, { values });
+      setisLoading(false);
+      setopenModal2(false);
+      dispatch(apiRefresh(!state.apiCallRefresh));
+      form.resetFields();
+    } else {
+      setisLoading(true);
+      await API.post(`restaurant-details/${id}`, { values });
+      setisLoading(false);
+      setopenModal(false);
+      dispatch(apiRefresh(!state.apiCallRefresh));
+      form.resetFields();
+    }
+  };
   return (
     <Form layout="vertical" form={form} onFinish={onFinish} autoComplete="off">
       <Form.Item
         label="მძღოლის სახელი"
         name="driverName"
+        initialValue={data?.driverName}
         rules={[{ required: true, message: "გთხოვთ მიუთითოთ მძღოლის სახელი" }]}
       >
         <Input />
@@ -24,6 +53,7 @@ const DetailTaskForm: React.FC<SetOpenModal> = ({
       <Form.Item
         label="ბოთლის სახეობა"
         name="typeOfBottle"
+        initialValue={data?.typeOfBottle}
         rules={[{ required: true, message: "გთხოვთ მიუთითოთ ბოთლის სახეობა" }]}
       >
         <Select
@@ -40,6 +70,7 @@ const DetailTaskForm: React.FC<SetOpenModal> = ({
       <Form.Item
         label="რაოდენობა"
         name="quantity"
+        initialValue={data?.quantity}
         rules={[{ required: true, message: "გთხოვთ მიუთითოთ რაოდენობა" }]}
       >
         <Input type="number" min={1} placeholder="რაოდენობა" />
@@ -47,6 +78,7 @@ const DetailTaskForm: React.FC<SetOpenModal> = ({
       <Form.Item
         label="თარიღი"
         name="date"
+        initialValue={data && dayjs(data?.date)}
         rules={[{ required: true, message: "გთხოვთ მიუთითოთ თარიღი" }]}
       >
         <DatePicker className="w-full" />
@@ -57,12 +89,12 @@ const DetailTaskForm: React.FC<SetOpenModal> = ({
           danger
           ghost
           className="mr-[233px]"
-          onClick={() => setopenModal(false)}
+          onClick={() => (data ? setopenModal2(false) : setopenModal(false))}
         >
           გამოსვლა
         </Button>
 
-        <Button htmlType="submit" type="primary" ghost>
+        <Button htmlType="submit" type="primary" ghost loading={isLoading}>
           დამატება
         </Button>
       </Form.Item>

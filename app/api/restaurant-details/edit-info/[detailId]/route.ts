@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextResponse } from "next/server";
 import GoogleAuth from "@/app/api/ApiAuth";
 import dayjs from "dayjs";
@@ -17,7 +18,7 @@ export async function PUT(req: Request, res: any) {
         values: [
           [
             values.driverName,
-            values.bottleType,
+            values.typeOfBottle,
             values.quantity,
             dayjs(values.date).format("YYYY-DD-MM"),
           ],

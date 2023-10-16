@@ -9,7 +9,7 @@ export async function GET() {
     const opt: any = {
       spreadsheetId: process.env.SPREADSHEET_ID,
       includeGridData: true,
-      ranges: ["restaurants!A2:A", "restaurants!B1:B", "restaurants!C2:C"],
+      ranges: ["restaurants!A2:A", "restaurants!B2:B", "restaurants!C2:C"],
     };
     const response = await gsapi.spreadsheets.get(opt);
     if (
@@ -65,7 +65,6 @@ export async function GET() {
       return NextResponse.json("Invalid data structure", { status: 400 });
     }
   } catch (error) {
-    console.log(error);
     return NextResponse.json("Something Went Wrong", { status: 400 });
   }
 }

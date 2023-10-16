@@ -16,10 +16,7 @@ const SearchOption: React.FC = () => {
   );
 
   const onSearch: SearchProps["onSearch"] = (value: any) => {
-    console.log(value);
-
     const searchOptions = { searchValue, dateRange };
-    console.log(searchOptions);
   };
 
   return (

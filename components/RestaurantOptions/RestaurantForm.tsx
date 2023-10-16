@@ -15,23 +15,36 @@ type FieldType = {
 
 type SetOpenModal = {
   setopenModal: any;
+  setopenModal2: any;
+  item: any;
 };
 
 const RestaurantForm: React.FC<SetOpenModal> = ({
   setopenModal,
+  setopenModal2,
+  item,
 }: SetOpenModal) => {
   const [form] = Form.useForm();
   const [isLoading, setisLoading] = useState(false);
   const { state, dispatch }: any = useGlobalContext();
 
   const onFinish = async (values: string) => {
-    setisLoading(true);
-    await API.post("restaurants/add-info", { values }).then((res) =>
-      console.log(res)
-    );
-    setisLoading(false);
-    setopenModal(false);
-    dispatch(apiRefresh(!state.apiCallRefresh));
+    if (item) {
+      setisLoading(true);
+      const updatedValues = { ...values, id: item.id };
+      await API.post(`restaurants/edit-info/`, { updatedValues });
+      setisLoading(false);
+      setopenModal2(false);
+      dispatch(apiRefresh(!state.apiCallRefresh));
+      form.resetFields();
+    } else {
+      setisLoading(true);
+      await API.post("restaurants/add-info", { values });
+      setisLoading(false);
+      setopenModal(false);
+      dispatch(apiRefresh(!state.apiCallRefresh));
+      form.resetFields();
+    }
   };
 
   return (
@@ -46,6 +59,7 @@ const RestaurantForm: React.FC<SetOpenModal> = ({
         <Form.Item<FieldType>
           label="რესტორნის სახელი"
           name="restaurantName"
+          initialValue={item?.restaurantName}
           rules={[
             { required: true, message: "გთხოვთ მიუთითოთ რესტორნის სახელი!" },
           ]}
@@ -56,6 +70,7 @@ const RestaurantForm: React.FC<SetOpenModal> = ({
         <Form.Item<FieldType>
           label="შ.პ.ს სახელწოდება"
           name="ltdName"
+          initialValue={item?.ltdName}
           rules={[
             { required: true, message: "გთხოვთ მიუთითოთ შ.პ.ს სახელწოდება!" },
           ]}
@@ -66,6 +81,7 @@ const RestaurantForm: React.FC<SetOpenModal> = ({
         <Form.Item<FieldType>
           label="ქალაქი"
           name="city"
+          initialValue={item?.city}
           rules={[{ required: true, message: "გთხოვთ მიუთითოთ ქალაქი!" }]}
         >
           <Input />
@@ -76,7 +92,7 @@ const RestaurantForm: React.FC<SetOpenModal> = ({
             type="primary"
             danger
             ghost
-            onClick={() => setopenModal(false)}
+            onClick={() => (item ? setopenModal2(false) : setopenModal(false))}
           >
             გამოსვლა
           </Button>
