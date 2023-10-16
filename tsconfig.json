@@ -29,7 +29,9 @@
     ".next/types/**/*.ts",
     "app/(pages)/restaurants/page.tsx",
     "app/(pages)/_document.js",
-    "app/layout.jsx"
+    "app/layout.jsx",
+    "context/global/GlobalContextProvider.jsx",
+    "context/global/globalReducer.jsx"
   ],
   "exclude": ["node_modules"]
 }

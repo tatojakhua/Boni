@@ -1,14 +1,13 @@
 import { NextResponse } from "next/server";
 import GoogleAuth from "../../ApiAuth";
 
-export async function POST(req: Request, res: any) {
-  const { values } = await req.json();
+export async function POST(req: Request) {
+  const { updatedValues } = await req.json();
   try {
     const gsapi = await GoogleAuth();
 
-
     // Specify the range to clear
-    const rangeToUpdate = `restaurants!A${values.id}:C${values.id}`;
+    const rangeToUpdate = `restaurants!A${updatedValues.id}:C${updatedValues.id}`;
 
     // Clear values in the specified range
     await gsapi.spreadsheets.values.update({
@@ -16,12 +15,17 @@ export async function POST(req: Request, res: any) {
       range: rangeToUpdate,
       valueInputOption: "USER_ENTERED",
       requestBody: {
-        values: [[values.restaurantName, values.ltdName, values.city]],
+        values: [
+          [
+            updatedValues.restaurantName,
+            updatedValues.ltdName,
+            updatedValues.city,
+          ],
+        ],
       },
     });
     return NextResponse.json("Edited", { status: 201 });
   } catch (error) {
-    console.error("Error:", error);
     return NextResponse.json("Something wrong", { status: 400 });
   }
 }

@@ -1,15 +1,11 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-import React from "react";
+import React, { useState } from "react";
 import { Form, Button, Input } from "antd";
-
-const onFinish = (values: string) => {
-  console.log("Success:", values);
-};
-
-const onFinishFailed = (errorInfo: any) => {
-  console.log("Failed:", errorInfo);
-};
+import API from "@/utils/API";
+import { useGlobalContext } from "@/context/global/GlobalContextProvider";
+import { apiRefresh } from "@/context/actions/actionCreators";
 
 type FieldType = {
   restaurantName?: string;
@@ -19,64 +15,95 @@ type FieldType = {
 
 type SetOpenModal = {
   setopenModal: any;
+  setopenModal2: any;
+  item: any;
 };
 
 const RestaurantForm: React.FC<SetOpenModal> = ({
   setopenModal,
-}: SetOpenModal) => (
-  <div className="p-4 border-2 border-red-500">
-    <Form
-      layout="vertical"
-      initialValues={{ layout: "vertical" }}
-      onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
-      autoComplete="off"
-    >
-      <Form.Item<FieldType>
-        label="რესტორნის სახელი"
-        name="restaurantName"
-        rules={[
-          { required: true, message: "გთხოვთ მიუთითოთ რესტორნის სახელი!" },
-        ]}
-      >
-        <Input />
-      </Form.Item>
+  setopenModal2,
+  item,
+}: SetOpenModal) => {
+  const [form] = Form.useForm();
+  const [isLoading, setisLoading] = useState(false);
+  const { state, dispatch }: any = useGlobalContext();
 
-      <Form.Item<FieldType>
-        label="შ.პ.ს სახელწოდება"
-        name="ltdName"
-        rules={[
-          { required: true, message: "გთხოვთ მიუთითოთ შ.პ.ს სახელწოდება!" },
-        ]}
-      >
-        <Input />
-      </Form.Item>
+  const onFinish = async (values: string) => {
+    if (item) {
+      setisLoading(true);
+      const updatedValues = { ...values, id: item.id };
+      await API.post(`restaurants/edit-info/`, { updatedValues });
+      setisLoading(false);
+      setopenModal2(false);
+      dispatch(apiRefresh(!state.apiCallRefresh));
+      form.resetFields();
+    } else {
+      setisLoading(true);
+      await API.post("restaurants/add-info", { values });
+      setisLoading(false);
+      setopenModal(false);
+      dispatch(apiRefresh(!state.apiCallRefresh));
+      form.resetFields();
+    }
+  };
 
-      <Form.Item<FieldType>
-        label="ქალაქი"
-        name="city"
-        rules={[{ required: true, message: "გთხოვთ მიუთითოთ ქალაქი!" }]}
+  return (
+    <div className="p-4 border-2 border-red-500">
+      <Form
+        layout="vertical"
+        form={form}
+        initialValues={{ layout: "vertical" }}
+        onFinish={onFinish}
+        autoComplete="off"
       >
-        <Input />
-      </Form.Item>
-
-      <Form.Item className="mt-10">
-        <Button
-          type="primary"
-          danger
-          ghost
-          className="mr-[233px]"
-          onClick={() => setopenModal(false)}
+        <Form.Item<FieldType>
+          label="რესტორნის სახელი"
+          name="restaurantName"
+          initialValue={item?.restaurantName}
+          rules={[
+            { required: true, message: "გთხოვთ მიუთითოთ რესტორნის სახელი!" },
+          ]}
         >
-          გამოსვლა
-        </Button>
+          <Input />
+        </Form.Item>
 
-        <Button htmlType="submit" type="primary" ghost>
-          დამატება
-        </Button>
-      </Form.Item>
-    </Form>
-  </div>
-);
+        <Form.Item<FieldType>
+          label="შ.პ.ს სახელწოდება"
+          name="ltdName"
+          initialValue={item?.ltdName}
+          rules={[
+            { required: true, message: "გთხოვთ მიუთითოთ შ.პ.ს სახელწოდება!" },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+
+        <Form.Item<FieldType>
+          label="ქალაქი"
+          name="city"
+          initialValue={item?.city}
+          rules={[{ required: true, message: "გთხოვთ მიუთითოთ ქალაქი!" }]}
+        >
+          <Input />
+        </Form.Item>
+
+        <Form.Item className="w-full flex flex-row  justify-between items-center mt-10  border-2 border-red-500">
+          <Button
+            type="primary"
+            danger
+            ghost
+            onClick={() => (item ? setopenModal2(false) : setopenModal(false))}
+          >
+            გამოსვლა
+          </Button>
+
+          <Button htmlType="submit" type="primary" ghost loading={isLoading}>
+            დამატება
+          </Button>
+        </Form.Item>
+      </Form>
+    </div>
+  );
+};
 
 export default RestaurantForm;
