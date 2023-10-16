@@ -7,7 +7,7 @@ export async function DELETE(req: Request, res: any) {
     const gsapi = await GoogleAuth();
 
     // Specify the range to clear
-    const rangeToClear = `restaurants!A${id}:B${id}`;
+    const rangeToClear = `restaurants!A${id}:C${id}`;
     // Clear values in the specified range
     const response = await gsapi.spreadsheets.values.clear({
       spreadsheetId: process.env.SPREADSHEET_ID,
