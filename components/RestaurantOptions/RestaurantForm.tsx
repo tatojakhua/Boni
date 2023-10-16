@@ -26,7 +26,9 @@ const RestaurantForm: React.FC<SetOpenModal> = ({
 
   const onFinish = async (values: string) => {
     setisLoading(true);
-    await API.post("restaurants/add-info", { values });
+    await API.post("restaurants/add-info", { values }).then((res) =>
+      console.log(res)
+    );
     setisLoading(false);
     setopenModal(false);
     dispatch(apiRefresh(!state.apiCallRefresh));

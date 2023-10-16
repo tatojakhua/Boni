@@ -5,7 +5,6 @@ import { useGlobalContext } from "@/context/global/GlobalContextProvider";
 
 const useFetchRestaurant = () => {
   const { state }: any = useGlobalContext();
-  console.log(state);
 
   const [data, setdata] = useState([]);
   const [Error, setError] = useState("");
@@ -13,7 +12,9 @@ const useFetchRestaurant = () => {
   const handleFetchAPI = async () => {
     setisLoading(true);
     await API.get("/restaurants/get-list")
-      .then((res) => setdata(res.data))
+      .then((res) => {
+        setdata(res.data), console.log(res.data);
+      })
       .catch((err) => setError(err.data))
       .finally(() => setisLoading(false));
   };
