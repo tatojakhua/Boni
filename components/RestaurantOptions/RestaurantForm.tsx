@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 import React, { useState } from "react";
-import { Form, Button, Input } from "antd";
+import { Form, Button, Input, Space } from "antd";
 import API from "@/utils/API";
 import { useGlobalContext } from "@/context/global/GlobalContextProvider";
 import { apiRefresh } from "@/context/actions/actionCreators";
@@ -28,7 +28,7 @@ const RestaurantForm: React.FC<SetOpenModal> = ({
   const [isLoading, setisLoading] = useState(false);
   const { state, dispatch }: any = useGlobalContext();
 
-  const onFinish = async (values: string) => {
+  const onFinish = async (values: any) => {
     if (item) {
       setisLoading(true);
       const updatedValues = { ...values, id: item.id };
@@ -48,7 +48,7 @@ const RestaurantForm: React.FC<SetOpenModal> = ({
   };
 
   return (
-    <div className="p-4 border-2 border-red-500">
+    <div className="p-4">
       <Form
         layout="vertical"
         form={form}
@@ -87,19 +87,26 @@ const RestaurantForm: React.FC<SetOpenModal> = ({
           <Input />
         </Form.Item>
 
-        <Form.Item className="w-full flex flex-row  justify-between items-center mt-10  border-2 border-red-500">
-          <Button
-            type="primary"
-            danger
-            ghost
-            onClick={() => (item ? setopenModal2(false) : setopenModal(false))}
+        <Form.Item className="mt-10">
+          <Space
+            direction="horizontal"
+            className="w-full flex flex-row  justify-between items-center"
           >
-            გამოსვლა
-          </Button>
+            <Button
+              type="primary"
+              danger
+              ghost
+              onClick={() =>
+                item ? setopenModal2(false) : setopenModal(false)
+              }
+            >
+              გამოსვლა
+            </Button>
 
-          <Button htmlType="submit" type="primary" ghost loading={isLoading}>
-            დამატება
-          </Button>
+            <Button htmlType="submit" type="primary" ghost loading={isLoading}>
+              დამატება
+            </Button>
+          </Space>
         </Form.Item>
       </Form>
     </div>

@@ -11,10 +11,9 @@ import DetailTaskForm from "./DetailTaskForm";
 const RestaurantDetails = () => {
   const [openModal2, setopenModal2] = useState(false);
   const [data, setdata] = useState([]);
-
   const { state, dispatch } = useGlobalContext();
   const { id } = useParams();
-  const [dataSource, error, isLoading] = useFetchDetails(id);
+  const [dataSource, error, isLoading]: any = useFetchDetails(id);
 
   const handleDelete = async (id: any) => {
     await API.delete(`restaurant-details/delete-info/${id}`);
@@ -113,7 +112,11 @@ const RestaurantDetails = () => {
         open={openModal2}
         footer={false}
       >
-        <DetailTaskForm setopenModal2={setopenModal2} data={data} />
+        <DetailTaskForm
+          setopenModal2={setopenModal2}
+          data={data}
+          setopenModal={undefined}
+        />
       </Modal>
     </>
   );

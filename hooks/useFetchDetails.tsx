@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import API from "@/utils/API";
 import { useGlobalContext } from "@/context/global/GlobalContextProvider";
 
-const useFetchDetails = (id: string) => {
+const useFetchDetails = (id: any) => {
   const { state } = useGlobalContext();
   const [data, setdata] = useState([]);
   const [Error, setError] = useState("");

@@ -66,7 +66,11 @@ const CardItem = ({ item }: any) => {
         onCancel={() => setopenModal2(false)}
         footer={false}
       >
-        <RestaurantForm item={item} setopenModal2={setopenModal2} />
+        <RestaurantForm
+          item={item}
+          setopenModal2={setopenModal2}
+          setopenModal={undefined}
+        />
       </Modal>
     </>
   );

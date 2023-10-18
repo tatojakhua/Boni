@@ -10,7 +10,7 @@ const inter = Noto_Serif_Georgian({
 
 export default function Home() {
   return (
-    <main className={`${inter.variable} font-Noto_Serif_Georgian bg-[#081420]`}>
+    <main className={`${inter.variable} font-Noto_Serif_Georgian`}>
       <Restaurants />
     </main>
   );
