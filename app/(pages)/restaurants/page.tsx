@@ -23,7 +23,11 @@ const Restaurants = () => {
           onCancel={() => setopenModal(false)}
           footer={false}
         >
-          <RestaurantForm setopenModal={setopenModal} />
+          <RestaurantForm
+            setopenModal={setopenModal}
+            setopenModal2={undefined}
+            item={undefined}
+          />
         </Modal>
       </div>
       <div className="relative h-screen">

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from "react";
-import { Button, DatePicker, Form, Input, Select } from "antd";
+import { Button, DatePicker, Form, Input, Select, Space } from "antd";
 import API from "@/utils/API";
 import { useParams } from "next/navigation";
 import { useGlobalContext } from "@/context/global/GlobalContextProvider";
@@ -84,19 +84,23 @@ const DetailTaskForm: React.FC<SetOpenModal> = ({
         <DatePicker className="w-full" />
       </Form.Item>
       <Form.Item className="mt-10">
-        <Button
-          type="primary"
-          danger
-          ghost
-          className="mr-[233px]"
-          onClick={() => (data ? setopenModal2(false) : setopenModal(false))}
+        <Space
+          direction="horizontal"
+          className="w-full flex flex-row  justify-between items-center"
         >
-          გამოსვლა
-        </Button>
+          <Button
+            type="primary"
+            danger
+            ghost
+            onClick={() => (data ? setopenModal2(false) : setopenModal(false))}
+          >
+            გამოსვლა
+          </Button>
 
-        <Button htmlType="submit" type="primary" ghost loading={isLoading}>
-          დამატება
-        </Button>
+          <Button htmlType="submit" type="primary" ghost loading={isLoading}>
+            დამატება
+          </Button>
+        </Space>
       </Form.Item>
     </Form>
   );
