@@ -1,8 +1,8 @@
 "use client";
-import RestaurantDetails from "@/components/RestaurantOptions/RestaurantDetails";
 import React, { useState } from "react";
 import { Space, Button, Modal } from "antd";
 import { useRouter } from "next/navigation";
+import RestaurantDetails from "@/components/RestaurantOptions/RestaurantDetails";
 import DetailTaskForm from "@/components/RestaurantOptions/DetailTaskForm";
 
 const Page = () => {

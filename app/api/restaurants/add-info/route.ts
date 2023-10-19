@@ -6,7 +6,7 @@ export async function POST(req: Request) {
   try {
     const gsapi = await GoogleAuth();
     const spreadsheetId = process.env.SPREADSHEET_ID;
-    const range = "restaurants!A:C"; // Modify the sheet name accordingly
+    const range = "restaurants!A:C";
 
     const response = await gsapi.spreadsheets.values.append({
       spreadsheetId,

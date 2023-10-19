@@ -13,10 +13,10 @@ import { apiRefresh } from "@/context/actions/actionCreators";
 import RestaurantForm from "./RestaurantForm";
 
 const { Meta } = Card;
-const CardItem = ({ item }: any) => {
+const CardItem = ({ item, loading }: any) => {
   const [isLoading, setisLoading] = useState(false);
   const [openModal2, setopenModal2] = useState(false);
-  const { state, dispatch } = useGlobalContext();
+  const { state, dispatch }: any = useGlobalContext();
   const router = useRouter();
 
   const delateRetaurant = async (id: string) => {
@@ -39,21 +39,24 @@ const CardItem = ({ item }: any) => {
           marginBottom: "70px",
           margin: "20px 10px",
         }}
-        actions={[
-          <SettingOutlined
-            key="setting"
-            onClick={() => router.push(`/restaurants/${item.id}`)}
-          />,
-          <EditOutlined key="edit" onClick={() => editForm()} />,
-          isLoading ? (
-            <div className="delete-loader"></div>
-          ) : (
-            <DeleteOutlined
-              key={"delete"}
-              onClick={() => delateRetaurant(item.id)}
-            />
-          ),
-        ]}
+        loading={loading}
+        actions={
+          loading || [
+            <SettingOutlined
+              key="setting"
+              onClick={() => router.push(`/restaurants/${item.id}`)}
+            />,
+            <EditOutlined key="edit" onClick={() => editForm()} />,
+            isLoading ? (
+              <div className="delete-loader"></div>
+            ) : (
+              <DeleteOutlined
+                key={"delete"}
+                onClick={() => delateRetaurant(item.id)}
+              />
+            ),
+          ]
+        }
       >
         <Meta title={item.restaurantName} />
         <Meta description={item.ltdName} />

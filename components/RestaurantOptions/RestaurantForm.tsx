@@ -1,6 +1,4 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 import React, { useState } from "react";
 import { Form, Button, Input, Space } from "antd";
 import API from "@/utils/API";

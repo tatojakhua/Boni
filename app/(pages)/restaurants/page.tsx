@@ -8,7 +8,6 @@ import Search from "@/components/Search/Search";
 
 const Restaurants = () => {
   const [openModal, setopenModal] = useState(false);
-
   return (
     <>
       <div className="flex flex-col sm:flex-row justify-center sm:justify-between items-center px-16 py-6 border-2 border-red-600">

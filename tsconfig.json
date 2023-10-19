@@ -30,8 +30,8 @@
     "app/(pages)/restaurants/page.tsx",
     "app/(pages)/_document.js",
     "app/layout.jsx",
-    "context/global/GlobalContextProvider.jsx",
-    "context/global/globalReducer.jsx"
+    "context/global/GlobalContextProvider.tsx",
+    "context/global/globalReducer.tsx"
   ],
   "exclude": ["node_modules"]
 }

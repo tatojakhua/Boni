@@ -19,7 +19,7 @@ const DetailTaskForm: React.FC<SetOpenModal> = ({
   data,
 }: SetOpenModal) => {
   const [isLoading, setisLoading] = useState(false);
-  const { state, dispatch } = useGlobalContext();
+  const { state, dispatch }: any = useGlobalContext();
   const [form] = Form.useForm();
   const { id } = useParams();
 
@@ -48,7 +48,7 @@ const DetailTaskForm: React.FC<SetOpenModal> = ({
         initialValue={data?.driverName}
         rules={[{ required: true, message: "გთხოვთ მიუთითოთ მძღოლის სახელი" }]}
       >
-        <Input />
+        <Input placeholder="მძღოლის სახელი" />
       </Form.Item>
       <Form.Item
         label="ბოთლის სახეობა"
