@@ -2,6 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
+.ant-pagination-prev,
+.ant-pagination-next,
+.ant-pagination-item {
+  background-color: whitesmoke !important;
+  font-weight: 800;
+}
+.ant-pagination-item-active {
+  border: 2px solid !important;
+  border-color: #1677ff !important;
+}
+.ant-table-row {
+  font-weight: 600;
+}
+.ant-input-wrapper {
+  width: 120%;
+}
+.ant-input {
+  background-color: white !important;
+}
+.ant-input-search-button {
+  background-color: #1677ff !important;
+}
+.ant-picker {
+  background-color: white !important;
+}
+
 .delete-loader {
   margin-left: 33px;
   width: 25px;

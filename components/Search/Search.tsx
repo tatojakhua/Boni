@@ -1,40 +1,28 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-"use client";
-import React from "react";
+import React, { useState } from "react";
 import { Input, Space, DatePicker } from "antd";
-// import type { SearchProps } from "../Search";
-// import { RangeValue } from "rc-picker/lib/interface";
-// import dayjs from "dayjs";
+// import useFetchRestaurant from "@/hooks/useFetchRestaurant";
+// import { useGlobalContext } from "@/context/global/GlobalContextProvider";
+// import { apiRefresh } from "@/context/actions/actionCreators";
 
 const { Search } = Input;
 const { RangePicker } = DatePicker;
 
 const SearchOption: React.FC = () => {
-  //   const [searchValue, setSearchValue] = useState("");
-  //   const [dateRange, setDateRange] = useState<RangeValue<dayjs.Dayjs> | null>(
-  //     null
-  //   );
+  // const { state, dispatch }: any = useGlobalContext();
+  const [searchValue, setSearchValue] = useState("");
 
-  // const onSearch: SearchProps["onSearch"] = (value: any) => {
-  //   const searchOptions = { searchValue, dateRange };
-  // };
+  // useFetchRestaurant(searchValue);
+  console.log(searchValue);
+  const onSearch = async (value: string) => {
+    setSearchValue(value);
+    // dispatch(apiRefresh(!state.apiCallRefresh));
+  };
 
   return (
-    <Space className="flex flex-col sm:flex-row border-2 border-blue-500 bg-white text-black font-bold">
-      <Search
-        placeholder="მოძებნე რესტორანი"
-        onSearch={() => {
-          // setSearchValue(value);
-          // onSearch(value);
-        }}
-        enterButton
-      />
-      <RangePicker
-        onChange={() => {
-          // onSearch(searchValue);
-          // setDateRange(dates);
-        }}
-      />
+    <Space className="w-[50%] flex flex-col  justify-between items-center lg:flex-row">
+      <Search placeholder="მოძებნე რესტორანი" onSearch={onSearch} enterButton />
+      <RangePicker />
     </Space>
   );
 };

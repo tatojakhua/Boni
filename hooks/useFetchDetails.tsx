@@ -1,11 +1,11 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from "react";
 import API from "@/utils/API";
 import { useGlobalContext } from "@/context/global/GlobalContextProvider";
 
 const useFetchDetails = (id: any) => {
-  const { state } = useGlobalContext();
+  const { state }: any = useGlobalContext();
   const [data, setdata] = useState([]);
   const [Error, setError] = useState("");
   const [isLoading, setisLoading] = useState(false);

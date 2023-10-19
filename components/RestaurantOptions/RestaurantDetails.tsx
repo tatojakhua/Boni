@@ -11,7 +11,7 @@ import DetailTaskForm from "./DetailTaskForm";
 const RestaurantDetails = () => {
   const [openModal2, setopenModal2] = useState(false);
   const [data, setdata] = useState([]);
-  const { state, dispatch } = useGlobalContext();
+  const { state, dispatch }: any = useGlobalContext();
   const { id } = useParams();
   const [dataSource, error, isLoading]: any = useFetchDetails(id);
 
@@ -100,7 +100,6 @@ const RestaurantDetails = () => {
     <>
       <Table
         rowClassName={() => "editable-row"}
-        bordered
         dataSource={dataSource}
         columns={columns}
         loading={isLoading}
