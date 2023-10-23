@@ -9,7 +9,12 @@ export async function GET() {
     const opt: any = {
       spreadsheetId: process.env.SPREADSHEET_ID,
       includeGridData: true,
-      ranges: ["restaurants!A2:A", "restaurants!B2:B", "restaurants!C2:C"],
+      ranges: [
+        "restaurants!A2:A",
+        "restaurants!B2:B",
+        "restaurants!C2:C",
+        "restaurants!D2:D",
+      ],
     };
     const response = await gsapi.spreadsheets.get(opt);
     if (
@@ -21,10 +26,10 @@ export async function GET() {
       const sheetData: any = response.data.sheets[0].data;
       const extractedValuesA = sheetData[0].rowData
         .map((row: any, index: number) => {
-          if (row.values && row.values[0].userEnteredValue?.stringValue) {
+          if (row.values && row.values[0].formattedValue) {
             return {
               id: index + 2, // Line number as ID (index + 1 because line numbers usually start from 1)
-              restaurantName: row.values[0].userEnteredValue.stringValue,
+              restaurantName: row.values[0].formattedValue,
             };
           }
           return null;
@@ -33,8 +38,8 @@ export async function GET() {
 
       const extractedValuesB = sheetData[1].rowData
         .map((row: any) => {
-          if (row.values && row.values[0].userEnteredValue?.stringValue) {
-            return row.values[0].userEnteredValue.stringValue;
+          if (row.values && row.values[0].formattedValue) {
+            return row.values[0].formattedValue;
           }
           return null;
         })
@@ -42,13 +47,20 @@ export async function GET() {
 
       const extractedValuesC = sheetData[2].rowData
         .map((row: any) => {
-          if (row.values && row.values[0].userEnteredValue?.stringValue) {
-            return row.values[0].userEnteredValue.stringValue;
+          if (row.values && row.values[0].formattedValue) {
+            return row.values[0].formattedValue;
           }
           return null;
         })
         .filter((value: any) => value !== null);
-
+      const extractedValuesD = sheetData[3].rowData
+        .map((row: any) => {
+          if (row.values && row.values[0].formattedValue) {
+            return row.values[0].formattedValue;
+          }
+          return null;
+        })
+        .filter((value: any) => value !== null);
       // Combine the values into an array of objects with IDs
       const combinedValues = extractedValuesA.map(
         (value: any, index: number) => ({
@@ -56,6 +68,7 @@ export async function GET() {
           restaurantName: value.restaurantName,
           ltdName: extractedValuesB[index],
           city: extractedValuesC[index],
+          numberOfBoxes: parseInt(extractedValuesD[index]),
         })
       );
 
