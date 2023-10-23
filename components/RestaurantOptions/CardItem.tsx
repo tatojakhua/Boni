@@ -63,7 +63,11 @@ const CardItem = ({ item, loading }: any) => {
       >
         <Meta title={item.restaurantName} />
         <Meta description={item.ltdName} />
-        <Meta description={item.city} />
+        <div className="flex flex-row">
+          <DeleteOutlined className="mr-2" />
+          <Meta description={item.city} />
+        </div>
+        <Meta description={item.numberOfBoxes} />
       </Card>
       <Modal
         title="რესტორნის რედაქტირება"

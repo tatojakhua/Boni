@@ -9,6 +9,7 @@ type FieldType = {
   restaurantName?: string;
   ltdName?: string;
   city?: string;
+  numberOfBoxes?: string;
 };
 
 type SetOpenModal = {
@@ -83,6 +84,16 @@ const RestaurantForm: React.FC<SetOpenModal> = ({
           rules={[{ required: true, message: "გთხოვთ მიუთითოთ ქალაქი!" }]}
         >
           <Input />
+        </Form.Item>
+        <Form.Item<FieldType>
+          label="ყუთების რაოდენობა"
+          name="numberOfBoxes"
+          initialValue={item?.city}
+          rules={[
+            { required: true, message: "გთხოვთ მიუთითოთ ყუთების რაოდენობა!" },
+          ]}
+        >
+          <Input type="number" min={1} />
         </Form.Item>
 
         <Form.Item className="mt-10">
