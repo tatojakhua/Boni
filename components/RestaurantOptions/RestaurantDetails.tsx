@@ -100,7 +100,7 @@ const RestaurantDetails = () => {
     <>
       <Table
         rowClassName={() => "editable-row"}
-        dataSource={dataSource}
+        dataSource={dataSource.map((item: any) => ({ ...item, key: item.id }))}
         columns={columns}
         loading={isLoading}
       />

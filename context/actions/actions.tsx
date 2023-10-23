@@ -1,3 +1,4 @@
 const APIREFRESH: string = "APIREFRESH";
+const SEARCHDATA: string = "SEARCHDATA";
 
-export { APIREFRESH };
+export { APIREFRESH, SEARCHDATA };

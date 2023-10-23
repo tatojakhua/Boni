@@ -1,11 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { APIREFRESH } from "../actions/actions";
+import { APIREFRESH, SEARCHDATA } from "../actions/actions";
 
 const globalReducer = (state: any, actions: any) => {
   const { type, payload } = actions;
   switch (type) {
     case APIREFRESH: {
       return { ...state, apiCallRefresh: payload };
+    }
+    case SEARCHDATA: {
+      return { ...state, currentSearchData: payload };
     }
 
     default:
@@ -14,5 +17,6 @@ const globalReducer = (state: any, actions: any) => {
 };
 const initialState = {
   apiCallRefresh: false,
+  currentSearchData: [],
 };
 export { globalReducer, initialState };

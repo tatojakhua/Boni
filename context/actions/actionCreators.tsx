@@ -1,4 +1,5 @@
-import { APIREFRESH } from "./actions";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { APIREFRESH, SEARCHDATA } from "./actions";
 
 const apiRefresh = (payload: boolean) => {
   return {
@@ -7,4 +8,11 @@ const apiRefresh = (payload: boolean) => {
   };
 };
 
-export { apiRefresh };
+const setSearchData = (payload: any) => {
+  return {
+    type: SEARCHDATA,
+    payload,
+  };
+};
+
+export { apiRefresh, setSearchData };

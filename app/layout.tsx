@@ -15,7 +15,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <ContextProvider>
-        <body className="bg-[#081420]">{children}</body>
+        <body className="bg-gradient-to-tl from-slate-800 via-black to-slate-900 min-h-screen bg-cover bg-no-repeat">
+          {children}
+        </body>
       </ContextProvider>
     </html>
   );

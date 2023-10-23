@@ -34,10 +34,13 @@ const CardItem = ({ item, loading }: any) => {
     <>
       <Card
         style={{
+          background:
+            "linear-gradient( transparent, rgb(255 255 255 / 23%), rgb(91 91 91))",
           width: 250,
           maxHeight: 450,
           marginBottom: "70px",
           margin: "20px 10px",
+          border: "none",
         }}
         loading={loading}
         actions={
