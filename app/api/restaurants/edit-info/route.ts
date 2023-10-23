@@ -7,7 +7,7 @@ export async function POST(req: Request) {
     const gsapi = await GoogleAuth();
 
     // Specify the range to clear
-    const rangeToUpdate = `restaurants!A${updatedValues.id}:C${updatedValues.id}`;
+    const rangeToUpdate = `restaurants!A${updatedValues.id}:D${updatedValues.id}`;
 
     // Clear values in the specified range
     await gsapi.spreadsheets.values.update({
@@ -20,12 +20,14 @@ export async function POST(req: Request) {
             updatedValues.restaurantName,
             updatedValues.ltdName,
             updatedValues.city,
+            updatedValues.numberOfBoxes,
           ],
         ],
       },
     });
     return NextResponse.json("Edited", { status: 201 });
   } catch (error) {
+    console.log(error);
     return NextResponse.json("Something wrong", { status: 400 });
   }
 }

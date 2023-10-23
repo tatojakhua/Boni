@@ -13,7 +13,14 @@ export async function POST(req: Request) {
       range,
       valueInputOption: "USER_ENTERED",
       requestBody: {
-        values: [[values.restaurantName, values.ltdName, values.city]],
+        values: [
+          [
+            values.restaurantName,
+            values.ltdName,
+            values.city,
+            values.numberOfBoxes,
+          ],
+        ],
       },
     });
 
