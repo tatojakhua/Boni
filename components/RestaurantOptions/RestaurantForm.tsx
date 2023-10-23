@@ -31,7 +31,9 @@ const RestaurantForm: React.FC<SetOpenModal> = ({
     if (item) {
       setisLoading(true);
       const updatedValues = { ...values, id: item.id };
-      await API.post(`restaurants/edit-info/`, { updatedValues });
+      await API.post(`restaurants/edit-info/`, {
+        updatedValues,
+      });
       setisLoading(false);
       setopenModal2(false);
       dispatch(apiRefresh(!state.apiCallRefresh));
@@ -88,7 +90,7 @@ const RestaurantForm: React.FC<SetOpenModal> = ({
         <Form.Item<FieldType>
           label="ყუთების რაოდენობა"
           name="numberOfBoxes"
-          initialValue={item?.city}
+          initialValue={item?.numberOfBoxes}
           rules={[
             { required: true, message: "გთხოვთ მიუთითოთ ყუთების რაოდენობა!" },
           ]}
