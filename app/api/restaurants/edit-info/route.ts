@@ -27,7 +27,6 @@ export async function POST(req: Request) {
     });
     return NextResponse.json("Edited", { status: 201 });
   } catch (error) {
-    console.log(error);
     return NextResponse.json("Something wrong", { status: 400 });
   }
 }
