@@ -16,10 +16,17 @@ const useFetchRestaurant = () => {
       .catch((err) => setError(err.data))
       .finally(() => setisLoading(false));
   };
-
   useEffect(() => {
+    // if (state?.currentSearchData?.length > 0) {
+    //   setdata(state.currentSearchData);
+    // }
+    // return () => {
+    //   if (state?.currentSearchData?.length) {
     handleFetchAPI();
+    // }
+    // };
   }, [state.apiCallRefresh]);
+
   return [data, Error, isLoading];
 };
 

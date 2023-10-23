@@ -10,7 +10,7 @@ const CardWrapper = () => {
   }
 
   return (
-    <div className="flex flex-row justify-around items-center flex-wrap p-6 my-10 border-2 border-yellow-500">
+    <div className="flex flex-row justify-around items-center flex-wrap p-6 my-10">
       {Data.map((item: any) => (
         <CardItem key={item.id} item={item} loading={isLoading} />
       ))}
