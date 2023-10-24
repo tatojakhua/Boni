@@ -12,10 +12,13 @@
   "dependencies": {
     "antd": "^5.10.0",
     "axios": "^1.5.1",
+    "bcrypt": "^5.1.1",
+    "cookie": "^0.5.0",
     "dayjs": "^1.11.10",
     "encoding": "^0.1.13",
     "font": "^0.0.4",
     "googleapis": "^127.0.0",
+    "jsonwebtoken": "^9.0.2",
     "next": "^13.5.4",
     "node-fetch": "^3.3.2",
     "react": "^18",
@@ -23,7 +26,10 @@
     "react-icons": "^4.11.0"
   },
   "devDependencies": {
-    "@types/node": "^20",
+    "@types/bcrypt": "^5.0.1",
+    "@types/cookie": "^0.5.3",
+    "@types/jsonwebtoken": "^9.0.4",
+    "@types/node": "^20.8.7",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@typescript-eslint/eslint-plugin": "^6.7.5",
