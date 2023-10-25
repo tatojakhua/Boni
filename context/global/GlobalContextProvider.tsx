@@ -3,7 +3,7 @@
 "use client";
 import React, { createContext, useContext, useReducer } from "react";
 
-const initialState = {}; // Define your initial state here
+const initialState = {};
 
 const Context = createContext(initialState); // Provide the initial state as an argument
 import { globalReducer } from "./globalReducer";

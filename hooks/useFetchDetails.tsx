@@ -47,7 +47,7 @@ const useFetchDetails = (id: any) => {
   };
   useEffect(() => {
     handleFetchAPI();
-  }, [state.apiCallRefresh]);
+  }, [state?.apiCallRefresh]);
 
   return [data, Error, isLoading];
 };
