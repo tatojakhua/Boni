@@ -6,7 +6,9 @@ import {
   EditOutlined,
   DeleteOutlined,
   SettingOutlined,
+  InboxOutlined,
 } from "@ant-design/icons";
+import { IoLocationOutline } from "react-icons/io5";
 import API from "@/utils/API";
 import { useGlobalContext } from "@/context/global/GlobalContextProvider";
 import { apiRefresh } from "@/context/actions/actionCreators";
@@ -29,13 +31,14 @@ const CardItem = ({ item, loading }: any) => {
   const editForm = () => {
     setopenModal2(true);
   };
-
   return (
     <>
       <Card
         style={{
+          boxShadow:
+            "rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px",
           background:
-            "linear-gradient( transparent, rgb(255 255 255 / 23%), rgb(91 91 91))",
+            "linear-gradient(#262626, rgb(144 144 144 / 23%), rgb(13 13 13))",
           width: 250,
           maxHeight: 450,
           marginBottom: "70px",
@@ -61,13 +64,19 @@ const CardItem = ({ item, loading }: any) => {
           ]
         }
       >
-        <Meta title={item.restaurantName} />
-        <Meta description={item.ltdName} />
-        <div className="flex flex-row">
-          <DeleteOutlined className="mr-2" />
+        <Meta title={item.restaurantName} style={{ marginBottom: "8px" }} />
+        <div className="flex flex-row my-2">
+          <span className="mr-2 text-white font-medium">შ.პ.ს:</span>
+          <Meta description={item.ltdName} style={{ marginTop: "0.5px" }} />
+        </div>
+        <div className="flex flex-row my-2">
+          <IoLocationOutline className="mr-2 text-white" />
           <Meta description={item.city} />
         </div>
-        <Meta description={item.numberOfBoxes} />
+        <div className="flex flex-row my-2">
+          <InboxOutlined className="mr-2 text-white" />
+          <Meta description={item.numberOfBoxes} />
+        </div>
       </Card>
       <Modal
         title="რესტორნის რედაქტირება"
