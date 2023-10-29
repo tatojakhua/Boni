@@ -76,7 +76,6 @@ export async function POST(req: Request) {
       { status: 201, headers }
     );
   } catch (error) {
-    console.log(error);
     return NextResponse.json("Password or User Incorrect", { status: 409 });
   }
 }
