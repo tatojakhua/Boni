@@ -35,7 +35,12 @@ export async function POST(req: Request) {
     const opt: any = {
       spreadsheetId: process.env.SPREADSHEET_ID,
       includeGridData: true,
-      ranges: ["restaurants!A2:A", "restaurants!B2:B", "restaurants!C2:C"],
+      ranges: [
+        "restaurants!A2:A",
+        "restaurants!B2:B",
+        "restaurants!C2:C",
+        "restaurants!D2:D",
+      ],
     };
     const response: any = await gsapi.spreadsheets.get(opt);
     const sheetData: any = response.data.sheets[0].data;
@@ -105,6 +110,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json(filteredValues, { status: 200 });
   } catch (error) {
+    console.log(error);
     return NextResponse.json("Something went wrong", { status: 400 });
   }
 }
