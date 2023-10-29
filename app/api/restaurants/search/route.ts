@@ -67,6 +67,14 @@ export async function POST(req: Request) {
         return null;
       })
       .filter((value: any) => value !== null);
+    const extractedValuesD = sheetData[3].rowData
+      .map((row: any) => {
+        if (row.values && row.values[0].formattedValue) {
+          return row.values[0].formattedValue;
+        }
+        return null;
+      })
+      .filter((value: any) => value !== null);
 
     const combinedValues = extractedValuesA.map(
       (value: any, index: number) => ({
@@ -74,6 +82,7 @@ export async function POST(req: Request) {
         restaurantName: value.restaurantName,
         ltdName: extractedValuesB[index],
         city: extractedValuesC[index],
+        numberOfBoxes: parseInt(extractedValuesD[index]),
       })
     );
     const filteredValues = combinedValues.filter((item: any) => {

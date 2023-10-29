@@ -11,7 +11,7 @@ const useFetchRestaurant = () => {
   const [isLoading, setisLoading] = useState(false);
   const handleFetchAPI = async () => {
     setisLoading(true);
-    await API.get("/restaurants/get-list")
+    await API.post("/restaurants/get-list")
       .then((res) => setdata(res.data))
       .catch((err) => setError(err.data))
       .finally(() => setisLoading(false));
