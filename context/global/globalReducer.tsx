@@ -17,6 +17,9 @@ const globalReducer = (state: any, actions: any) => {
 };
 const initialState = {
   apiCallRefresh: false,
-  currentSearchData: [],
+  values: {
+    searchValue: "",
+    dateRange: [],
+  },
 };
 export { globalReducer, initialState };

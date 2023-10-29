@@ -103,6 +103,10 @@ const RestaurantDetails = () => {
         dataSource={dataSource.map((item: any) => ({ ...item, key: item.id }))}
         columns={columns}
         loading={isLoading}
+        style={{
+          backgroundColor:
+            "linear-gradient(#262626, rgb(144 144 144 / 23%), rgb(13 13 13))",
+        }}
       />
       <Modal
         title="ვიზიტის რედაქტირება"

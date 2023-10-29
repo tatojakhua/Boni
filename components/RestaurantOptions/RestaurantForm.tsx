@@ -9,6 +9,7 @@ type FieldType = {
   restaurantName?: string;
   ltdName?: string;
   city?: string;
+  numberOfBoxes?: string;
 };
 
 type SetOpenModal = {
@@ -30,7 +31,9 @@ const RestaurantForm: React.FC<SetOpenModal> = ({
     if (item) {
       setisLoading(true);
       const updatedValues = { ...values, id: item.id };
-      await API.post(`restaurants/edit-info/`, { updatedValues });
+      await API.post(`restaurants/edit-info/`, {
+        updatedValues,
+      });
       setisLoading(false);
       setopenModal2(false);
       dispatch(apiRefresh(!state.apiCallRefresh));
@@ -83,6 +86,16 @@ const RestaurantForm: React.FC<SetOpenModal> = ({
           rules={[{ required: true, message: "გთხოვთ მიუთითოთ ქალაქი!" }]}
         >
           <Input />
+        </Form.Item>
+        <Form.Item<FieldType>
+          label="ყუთების რაოდენობა"
+          name="numberOfBoxes"
+          initialValue={item?.numberOfBoxes}
+          rules={[
+            { required: true, message: "გთხოვთ მიუთითოთ ყუთების რაოდენობა!" },
+          ]}
+        >
+          <Input type="number" min={1} />
         </Form.Item>
 
         <Form.Item className="mt-10">
