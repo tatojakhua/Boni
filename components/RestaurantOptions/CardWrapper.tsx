@@ -42,7 +42,6 @@ const CardWrapper = () => {
       .then((res) => {
         if (res?.data?.length > 0) {
           dispatch(apiRefresh(!state.apiCallRefresh));
-          setValues({ searchValue: "", dateRange: null });
         } else {
           error();
         }

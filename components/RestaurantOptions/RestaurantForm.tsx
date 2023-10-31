@@ -33,14 +33,18 @@ const RestaurantForm: React.FC<SetOpenModal> = ({
       const updatedValues = { ...values, id: item.id };
       await API.post(`restaurants/edit-info/`, {
         updatedValues,
-      });
+      })
+        .then((res) => console.log(res, "edit-info RES"))
+        .catch((er) => console.log(er, "edit-info ERROR"));
       setisLoading(false);
       setopenModal2(false);
       dispatch(apiRefresh(!state.apiCallRefresh));
       form.resetFields();
     } else {
       setisLoading(true);
-      await API.post("restaurants/add-info", { values });
+      await API.post("restaurants/add-info", { values })
+        .then((res) => console.log(res, "add-info RES"))
+        .catch((er) => console.log(er, "add-info ERROR"));
       setisLoading(false);
       setopenModal(false);
       dispatch(apiRefresh(!state.apiCallRefresh));

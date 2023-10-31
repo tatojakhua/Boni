@@ -23,7 +23,9 @@ const CardItem = ({ item, loading }: any) => {
 
   const delateRetaurant = async (id: string) => {
     setisLoading(true);
-    await API.delete(`/restaurants/delete-info/${id}`);
+    await API.delete(`/restaurants/delete-info/${id}`)
+      .then((res) => console.log(res, "delete-info RES"))
+      .catch((er) => console.log(er, "delete-info ERROR"));
     setisLoading(false);
     dispatch(apiRefresh(!state.apiCallRefresh));
   };

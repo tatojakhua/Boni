@@ -5,26 +5,31 @@ import { useGlobalContext } from "@/context/global/GlobalContextProvider";
 
 const useFetchRestaurant = (values: any) => {
   const { state }: any = useGlobalContext();
-  const [data, setdata] = useState([]);
+  const [data, setData] = useState([]);
   const [Error, setError] = useState("");
-  const [isLoading, setisLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleFetchAPI = async () => {
-    if (
-      values.searchValue !== "" ||
-      (values.dateRange && values.dateRange.length > 0)
-    ) {
-      setisLoading(true);
-      await API.post("/restaurants/search", { values })
-        .then((res) => setdata(res.data))
-        .catch((err) => setError(err.message))
-        .finally(() => setisLoading(false));
-    } else {
-      setisLoading(true);
-      await API.get("/restaurants/get-list")
-        .then((res) => setdata(res.data))
-        .catch((err) => setError(err.data))
-        .finally(() => setisLoading(false));
+    setIsLoading(true);
+    try {
+      if (
+        values.searchValue !== "" ||
+        (values.dateRange && values.dateRange.length > 0)
+      ) {
+        const res = await API.post("/restaurants/search", { values });
+        setData(res.data);
+      } else {
+        const res = await API.get("/restaurants/get-list", {
+          headers: {
+            "Cache-Control": "no-store",
+          },
+        });
+        setData(res.data);
+      }
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
