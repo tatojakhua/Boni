@@ -45,21 +45,21 @@ const Page = () => {
         >
           დამატება
         </Button>
-
-        <Modal
-          title="ახალი ვიზიტის დამატება"
-          onOk={() => setopenModal(false)}
-          onCancel={() => setopenModal(false)}
-          open={openModal}
-          footer={false}
-        >
-          <DetailTaskForm
-            setopenModal={setopenModal}
-            setopenModal2={undefined}
-            data={undefined}
-          />
-        </Modal>
       </Space>
+
+      <Modal
+        title="ახალი ვიზიტის დამატება"
+        onOk={() => setopenModal(false)}
+        onCancel={() => setopenModal(false)}
+        open={openModal}
+        footer={false}
+      >
+        <DetailTaskForm
+          setopenModal={setopenModal}
+          setopenModal2={undefined}
+          data={undefined}
+        />
+      </Modal>
       <RestaurantDetails />
     </div>
   );

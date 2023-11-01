@@ -8,7 +8,7 @@ const globalReducer = (state: any, actions: any) => {
       return { ...state, apiCallRefresh: payload };
     }
     case SEARCHDATA: {
-      return { ...state, currentSearchData: payload };
+      return { ...state, searchAvailable: payload };
     }
 
     default:
@@ -17,9 +17,6 @@ const globalReducer = (state: any, actions: any) => {
 };
 const initialState = {
   apiCallRefresh: false,
-  values: {
-    searchValue: "",
-    dateRange: [],
-  },
+  searchAvailable: false,
 };
 export { globalReducer, initialState };

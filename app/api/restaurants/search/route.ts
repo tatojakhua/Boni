@@ -35,7 +35,12 @@ export async function POST(req: Request) {
     const opt: any = {
       spreadsheetId: process.env.SPREADSHEET_ID,
       includeGridData: true,
-      ranges: ["restaurants!A2:A", "restaurants!B2:B", "restaurants!C2:C"],
+      ranges: [
+        "restaurants!A2:A",
+        "restaurants!B2:B",
+        "restaurants!C2:C",
+        "restaurants!D2:D",
+      ],
     };
     const response: any = await gsapi.spreadsheets.get(opt);
     const sheetData: any = response.data.sheets[0].data;
@@ -67,6 +72,14 @@ export async function POST(req: Request) {
         return null;
       })
       .filter((value: any) => value !== null);
+    const extractedValuesD = sheetData[3].rowData
+      .map((row: any) => {
+        if (row.values && row.values[0].formattedValue) {
+          return row.values[0].formattedValue;
+        }
+        return null;
+      })
+      .filter((value: any) => value !== null);
 
     const combinedValues = extractedValuesA.map(
       (value: any, index: number) => ({
@@ -74,6 +87,7 @@ export async function POST(req: Request) {
         restaurantName: value.restaurantName,
         ltdName: extractedValuesB[index],
         city: extractedValuesC[index],
+        numberOfBoxes: parseInt(extractedValuesD[index]),
       })
     );
     const filteredValues = combinedValues.filter((item: any) => {

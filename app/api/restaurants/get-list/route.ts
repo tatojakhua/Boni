@@ -2,7 +2,7 @@
 import { NextResponse } from "next/server";
 import GoogleAuth from "../../ApiAuth";
 
-export async function GET() {
+export async function POST() {
   try {
     const gsapi = await GoogleAuth();
 

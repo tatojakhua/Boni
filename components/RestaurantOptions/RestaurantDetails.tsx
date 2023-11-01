@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from "react";
-import { Table, Popconfirm, Button, Modal } from "antd";
+import { Table, Popconfirm, Button, Modal, message } from "antd";
 import { useParams } from "next/navigation";
 import useFetchDetails from "@/hooks/useFetchDetails";
 import { useGlobalContext } from "@/context/global/GlobalContextProvider";
@@ -14,15 +14,24 @@ const RestaurantDetails = () => {
   const { state, dispatch }: any = useGlobalContext();
   const { id } = useParams();
   const [dataSource, error, isLoading]: any = useFetchDetails(id);
+  const [messageApi, contextHolder] = message.useMessage();
 
   const handleDelete = async (id: any) => {
-    await API.delete(`restaurant-details/delete-info/${id}`);
-    dispatch(apiRefresh(!state.apiCallRefresh));
+    await API.delete(`restaurant-details/delete-info/${id}`)
+      .then(() => dispatch(apiRefresh(!state.apiCallRefresh)))
+      .catch(() => errorMessage());
   };
 
   const handleChange = (data: any) => {
     setdata(data);
     setopenModal2(true);
+  };
+
+  const errorMessage = () => {
+    messageApi.open({
+      type: "error",
+      content: "დაფიქსირდა შეცდომა",
+    });
   };
 
   const defaultColumns = [
@@ -94,10 +103,20 @@ const RestaurantDetails = () => {
   });
 
   if (error) {
-    return <h1>error</h1>;
+    return (
+      <div className="absolute flex flex-col justify-center items-center w-full h-screen bg-gradient-to-tl from-slate-800 via-black to-slate-900 top-0 z-10">
+        <h1 className="text-white text-2xl mb-[100px]">
+          დაფიქსირდა შეცდომა, შეამოწმეთ კავშირი ინტერნეტთან
+        </h1>
+        <Button type="primary" ghost onClick={() => window.location.reload()}>
+          ხელმეორედ ცდა
+        </Button>
+      </div>
+    );
   }
   return (
     <>
+      {contextHolder}
       <Table
         rowClassName={() => "editable-row"}
         dataSource={dataSource.map((item: any) => ({ ...item, key: item.id }))}

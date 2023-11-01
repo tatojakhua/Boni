@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from "react";
-import { Form, Button, Input, Space } from "antd";
+import { Form, Button, Input, Space, message } from "antd";
 import API from "@/utils/API";
 import { useGlobalContext } from "@/context/global/GlobalContextProvider";
 import { apiRefresh } from "@/context/actions/actionCreators";
@@ -26,6 +26,7 @@ const RestaurantForm: React.FC<SetOpenModal> = ({
   const [form] = Form.useForm();
   const [isLoading, setisLoading] = useState(false);
   const { state, dispatch }: any = useGlobalContext();
+  const [messageApi, contextHolder] = message.useMessage();
 
   const onFinish = async (values: any) => {
     if (item) {
@@ -34,26 +35,36 @@ const RestaurantForm: React.FC<SetOpenModal> = ({
       await API.post(`restaurants/edit-info/`, {
         updatedValues,
       })
-        .then((res) => console.log(res, "edit-info RES"))
-        .catch((er) => console.log(er, "edit-info ERROR"));
-      setisLoading(false);
-      setopenModal2(false);
-      dispatch(apiRefresh(!state.apiCallRefresh));
-      form.resetFields();
+        .then(() => {
+          setopenModal2(false);
+          dispatch(apiRefresh(!state.apiCallRefresh));
+          form.resetFields();
+        })
+        .catch(() => error())
+        .finally(() => setisLoading(false));
     } else {
       setisLoading(true);
       await API.post("restaurants/add-info", { values })
-        .then((res) => console.log(res, "add-info RES"))
-        .catch((er) => console.log(er, "add-info ERROR"));
-      setisLoading(false);
-      setopenModal(false);
-      dispatch(apiRefresh(!state.apiCallRefresh));
-      form.resetFields();
+        .then(() => {
+          setopenModal(false);
+          dispatch(apiRefresh(!state.apiCallRefresh));
+          form.resetFields();
+        })
+        .catch(() => error())
+        .finally(() => setisLoading(false));
     }
+  };
+
+  const error = () => {
+    messageApi.open({
+      type: "error",
+      content: "დაფიქსირდა შეცდომა",
+    });
   };
 
   return (
     <div className="p-4">
+      {contextHolder}
       <Form
         layout="vertical"
         form={form}
