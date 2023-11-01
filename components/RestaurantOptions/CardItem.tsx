@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from "react";
-import { Card, Modal } from "antd";
+import { Card, Modal, message } from "antd";
 import { useRouter } from "next/navigation";
 import {
   EditOutlined,
@@ -19,13 +19,22 @@ const CardItem = ({ item, loading }: any) => {
   const [isLoading, setisLoading] = useState(false);
   const [openModal2, setopenModal2] = useState(false);
   const { state, dispatch }: any = useGlobalContext();
+  const [messageApi, contextHolder] = message.useMessage();
   const router = useRouter();
 
   const delateRetaurant = async (id: string) => {
     setisLoading(true);
-    await API.delete(`/restaurants/delete-info/${id}`);
-    setisLoading(false);
-    dispatch(apiRefresh(!state.apiCallRefresh));
+    await API.delete(`/restaurants/delete-info/${id}`)
+      .then(() => dispatch(apiRefresh(!state.apiCallRefresh)))
+      .catch(() => error())
+      .finally(() => setisLoading(false));
+  };
+
+  const error = () => {
+    messageApi.open({
+      type: "error",
+      content: "დაფიქსირდა შეცდომა",
+    });
   };
 
   const editForm = () => {
@@ -33,6 +42,7 @@ const CardItem = ({ item, loading }: any) => {
   };
   return (
     <>
+      {contextHolder}
       <Card
         style={{
           boxShadow:

@@ -50,10 +50,6 @@
   color: white !important;
   font-weight: 500 !important;
 }
-.ant-form-item-control-input-content input {
-  font-weight: 400 !important;
-  color: black !important;
-}
 .ant-card-actions {
   background: none !important;
   border-top: none !important;
@@ -86,6 +82,11 @@
 .ant-table-tbody {
   color: white !important;
   background-color: rgba(51, 51, 51, 1) !important;
+}
+.ant-empty-description {
+  color: white !important;
+  font-size: 1.5rem !important;
+  line-height: 2rem !important;
 }
 .delete-loader {
   margin-left: 33px;

@@ -2,28 +2,28 @@
 import { useState, useEffect } from "react";
 import API from "../utils/API";
 import { useGlobalContext } from "@/context/global/GlobalContextProvider";
+import { setSearchData } from "@/context/actions/actionCreators";
 
 const useFetchRestaurant = (values: any) => {
-  const { state }: any = useGlobalContext();
+  const { state, dispatch }: any = useGlobalContext();
   const [data, setdata] = useState([]);
   const [Error, setError] = useState("");
   const [isLoading, setisLoading] = useState(false);
 
   const handleFetchAPI = async () => {
-    if (
-      values.searchValue !== "" ||
-      (values.dateRange && values.dateRange.length > 0)
-    ) {
+    if (state.searchAvailable) {
       setisLoading(true);
       await API.post("/restaurants/search", { values })
         .then((res) => setdata(res.data))
         .catch((err) => setError(err.message))
-        .finally(() => setisLoading(false));
+        .finally(() => {
+          setisLoading(false), dispatch(setSearchData(false));
+        });
     } else {
       setisLoading(true);
       await API.post("/restaurants/get-list")
         .then((res) => setdata(res.data))
-        .catch((err) => setError(err.data))
+        .catch((err) => setError(err.message))
         .finally(() => setisLoading(false));
     }
   };

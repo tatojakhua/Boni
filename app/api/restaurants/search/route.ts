@@ -110,7 +110,6 @@ export async function POST(req: Request) {
 
     return NextResponse.json(filteredValues, { status: 200 });
   } catch (error) {
-    console.log(error);
     return NextResponse.json("Something went wrong", { status: 400 });
   }
 }

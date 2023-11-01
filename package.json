@@ -16,7 +16,6 @@
     "cookie": "^0.5.0",
     "dayjs": "^1.11.10",
     "encoding": "^0.1.13",
-    "font": "^0.0.4",
     "googleapis": "^127.0.0",
     "jsonwebtoken": "^9.0.2",
     "next": "^13.5.4",
