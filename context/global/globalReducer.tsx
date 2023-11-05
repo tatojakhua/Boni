@@ -1,5 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { APIREFRESH, SEARCHDATA } from "../actions/actions";
+import { toggleLocalStorage } from "@/utils/jwt";
+import {
+  APIREFRESH,
+  AUTHENTICATION,
+  LOG_IN,
+  LOG_OUT,
+  SEARCHDATA,
+} from "../actions/actions";
 
 const globalReducer = (state: any, actions: any) => {
   const { type, payload } = actions;
@@ -10,6 +17,18 @@ const globalReducer = (state: any, actions: any) => {
     case SEARCHDATA: {
       return { ...state, searchAvailable: payload };
     }
+    case LOG_IN: {
+      const { accessToken } = payload;
+      toggleLocalStorage(accessToken);
+      return { isAuthenticated: true };
+    }
+    case AUTHENTICATION: {
+      return { isAuthenticated: payload };
+    }
+    case LOG_OUT: {
+      toggleLocalStorage(null);
+      return { isAuthenticated: false };
+    }
 
     default:
       break;
@@ -18,5 +37,6 @@ const globalReducer = (state: any, actions: any) => {
 const initialState = {
   apiCallRefresh: false,
   searchAvailable: false,
+  isAuthenticated: false,
 };
 export { globalReducer, initialState };

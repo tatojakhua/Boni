@@ -44,16 +44,9 @@ const CardItem = ({ item, loading }: any) => {
     <>
       {contextHolder}
       <Card
+        className="w-[250px] bg-gray-800 bg-opacity-30 border-none m-6 cursor-pointer hover:mt-1 ease-in-out duration-300"
         style={{
-          boxShadow:
-            "rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px",
-          background:
-            "linear-gradient(#262626, rgb(144 144 144 / 23%), rgb(13 13 13))",
-          width: 250,
-          maxHeight: 450,
-          marginBottom: "70px",
-          margin: "20px 10px",
-          border: "none",
+          boxShadow: "rgba(80, 115, 228, 0.403) 0px 10px 30px -10px",
         }}
         loading={loading}
         actions={
