@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { toggleLocalStorage } from "@/utils/jwt";
 import {
   APIREFRESH,
   AUTHENTICATION,
@@ -18,15 +17,12 @@ const globalReducer = (state: any, actions: any) => {
       return { ...state, searchAvailable: payload };
     }
     case LOG_IN: {
-      const { accessToken } = payload;
-      toggleLocalStorage(accessToken);
-      return { isAuthenticated: true };
+      return { ...state, isAuthenticated: true };
     }
     case AUTHENTICATION: {
-      return { isAuthenticated: payload };
+      return { ...state, isAuthenticated: payload };
     }
     case LOG_OUT: {
-      toggleLocalStorage(null);
       return { isAuthenticated: false };
     }
 

@@ -1,22 +1,25 @@
 "use client";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect } from "react";
-import Restaurants from "./(pages)/restaurants/page";
+// import Restaurants from "./(pages)/restaurants/page";
 import LognIn from "./(pages)/sign-in/page";
 import { useGlobalContext } from "@/context/global/GlobalContextProvider";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
-export default function Home() {
-  const route = useRouter();
+export default function Home({ children }: any) {
+  const router = useRouter();
+  const pathname = usePathname();
   const { state }: any = useGlobalContext();
   useEffect(() => {
-    console.log("isAuthenticated CHECK");
-    if (state.isAuthenticated) {
-      route.push("/restaurants");
+    if (!state.isAuthenticated) {
+      router.push("/sign-in");
     } else {
-      route.push("/sign-in");
+      router.push(pathname);
     }
-  }, [state.apiCallRefresh]);
+    if (!pathname || state.isAuthenticated) {
+      router.push("/restaurants");
+    }
+  }, [state.apiCallRefresh, state.isAuthenticated]);
 
-  return <main>{state.isAuthenticated ? <Restaurants /> : <LognIn />}</main>;
+  return <main>{state.isAuthenticated ? children : <LognIn />}</main>;
 }

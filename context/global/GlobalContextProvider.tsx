@@ -8,17 +8,18 @@ const Context = createContext(initialState);
 import { globalReducer } from "./globalReducer";
 import API from "@/utils/API";
 import { checkAuthentication } from "../actions/actionCreators";
-import { toggleLocalStorage } from "@/utils/jwt";
 const ContextProvider = ({ children }: any) => {
   const [state, dispatch] = useReducer(globalReducer, initialState);
   const checkTokenValidity = async () => {
     await API.post("auth/check-token")
-      .then(() => dispatch(checkAuthentication(true)))
+      .then(() => {
+        dispatch(checkAuthentication(true));
+      })
       .catch(() => {
         try {
           refreshToken();
         } catch (error) {
-          dispatch(checkAuthentication(false)), toggleLocalStorage(null);
+          dispatch(checkAuthentication(false));
         }
       });
   };
@@ -28,12 +29,12 @@ const ContextProvider = ({ children }: any) => {
         dispatch(checkAuthentication(true));
       })
       .catch(() => {
-        dispatch(checkAuthentication(false)), toggleLocalStorage(null);
+        dispatch(checkAuthentication(false));
       });
   };
   useEffect(() => {
     checkTokenValidity();
-  }, [state.apiCallRefresh]);
+  }, [state.apiCallRefresh, state.isAuthenticated]);
 
   return (
     <Context.Provider value={{ state, dispatch }}>{children}</Context.Provider>
