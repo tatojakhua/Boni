@@ -1,14 +1,40 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable react/prop-types */
 "use client";
-import React, { createContext, useContext, useReducer } from "react";
+import React, { createContext, useContext, useEffect, useReducer } from "react";
 
 const initialState = {};
 
-const Context = createContext(initialState); // Provide the initial state as an argument
+const Context = createContext(initialState);
 import { globalReducer } from "./globalReducer";
+import API from "@/utils/API";
+import { checkAuthentication } from "../actions/actionCreators";
+import { toggleLocalStorage } from "@/utils/jwt";
 const ContextProvider = ({ children }: any) => {
   const [state, dispatch] = useReducer(globalReducer, initialState);
+  const checkTokenValidity = async () => {
+    await API.post("auth/check-token")
+      .then(() => dispatch(checkAuthentication(true)))
+      .catch(() => {
+        try {
+          refreshToken();
+        } catch (error) {
+          dispatch(checkAuthentication(false)), toggleLocalStorage(null);
+        }
+      });
+  };
+  const refreshToken = async () => {
+    await API.post("auth/refresh-token")
+      .then(() => {
+        dispatch(checkAuthentication(true));
+      })
+      .catch(() => {
+        dispatch(checkAuthentication(false)), toggleLocalStorage(null);
+      });
+  };
+  useEffect(() => {
+    checkTokenValidity();
+  }, [state.apiCallRefresh]);
+
   return (
     <Context.Provider value={{ state, dispatch }}>{children}</Context.Provider>
   );

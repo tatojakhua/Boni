@@ -3,16 +3,32 @@
 import React, { useState } from "react";
 import CardItem from "./CardItem";
 import useFetchRestaurant from "../../hooks/useFetchRestaurant";
-import { Input, Space, DatePicker, message, Button, Modal, Empty } from "antd";
+import {
+  Input,
+  Space,
+  DatePicker,
+  message,
+  Button,
+  Modal,
+  Empty,
+  Tooltip,
+} from "antd";
+import { LogoutOutlined } from "@ant-design/icons";
 import RestaurantForm from "@/components/RestaurantOptions/RestaurantForm";
 import API from "@/utils/API";
 import { useGlobalContext } from "@/context/global/GlobalContextProvider";
-import { apiRefresh, setSearchData } from "@/context/actions/actionCreators";
+import {
+  apiRefresh,
+  logout,
+  setSearchData,
+} from "@/context/actions/actionCreators";
 import { ArrowLeftOutlined } from "@ant-design/icons";
+import { useRouter } from "next/navigation";
 
 const { Search } = Input;
 const { RangePicker } = DatePicker;
 const CardWrapper = () => {
+  const route = useRouter();
   const { state, dispatch }: any = useGlobalContext();
   const [messageApi, contextHolder] = message.useMessage();
   const [openModal, setopenModal] = useState(false);
@@ -55,6 +71,15 @@ const CardWrapper = () => {
     dispatch(apiRefresh(!state.apiCallRefresh));
     setshowBackBtn(false);
     setValues({ dateRange: null, searchValue: "" });
+  };
+  const handleLogOut = async () => {
+    await API.get("auth/logout")
+      .then(() => {
+        route.push("/sign-in"), dispatch(logout());
+      })
+      .catch(() => {
+        error();
+      });
   };
   if (Error) {
     return (
@@ -112,6 +137,17 @@ const CardWrapper = () => {
         >
           რესტორნის დამატება
         </Button>
+        <Tooltip title="გამოსვლა">
+          <Button
+            shape="circle"
+            icon={<LogoutOutlined />}
+            onClick={handleLogOut}
+            style={{
+              borderColor: "red",
+              color: "red",
+            }}
+          />
+        </Tooltip>
         <Modal
           title="ახალი რესტორნის დამატება"
           open={openModal}

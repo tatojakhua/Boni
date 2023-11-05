@@ -2,6 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
+label[for="username"],
+label[for="password"],
+label[for="username"]::placeholder {
+  color: white !important;
+  font-weight: 600 !important;
+  margin-top: 1.5rem !important;
+}
+input[id="password"],
+input[id="username"],
+input[id="username"]::placeholder,
+input[id="password"]::placeholder {
+  background-color: transparent !important;
+  color: white !important;
+  background: transparent !important;
+  font-weight: 600 !important;
+}
+.anticon-eye,
+.anticon-eye-invisible {
+  color: white !important;
+}
+
 .ant-pagination-prev,
 .ant-pagination-next,
 .ant-pagination-item {
@@ -88,6 +109,7 @@
   font-size: 1.5rem !important;
   line-height: 2rem !important;
 }
+
 .delete-loader {
   margin-left: 33px;
   width: 25px;

@@ -28,14 +28,14 @@ export async function POST(req: Request) {
         if (row.values && row.values[0].formattedValue) {
           return {
             id: index + 2, // Line number as ID (index + 1 because line numbers usually start from 1)
-            userName: row.values[0].formattedValue,
+            username: row.values[0].formattedValue,
             password: extractedPasswords[index], // Assuming the password is in the corresponding row of column B
           };
         }
         return null;
       })
       .filter(
-        (value: any) => value !== null && value.userName === values.username
+        (value: any) => value !== null && value.username === values.username
       );
     if (
       extractedValues.length === 0 ||
@@ -46,14 +46,14 @@ export async function POST(req: Request) {
 
     const accessToken = sign(
       {
-        user: extractedValues.userName,
+        user: extractedValues.username,
       },
       process.env.JWT_SECRET as string,
       { expiresIn: "30m", algorithm: "HS256" }
     );
     const refreshToken = sign(
       {
-        user: extractedValues.userName,
+        user: extractedValues.username,
       },
       process.env.JWT_SECRET as string,
       { expiresIn: "3d", algorithm: "HS256" }
