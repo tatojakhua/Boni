@@ -155,7 +155,7 @@ input[id="password"]::placeholder {
       no-repeat,
     conic-gradient(#0000 30%, #1677ff);
   -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 16px), #000 0);
-  animation: s3 0.5s infinite linear;
+  animation: s3 0.7s infinite linear;
 }
 
 @keyframes s3 {

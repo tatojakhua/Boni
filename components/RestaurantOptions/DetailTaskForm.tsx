@@ -106,7 +106,7 @@ const DetailTaskForm: React.FC<SetOpenModal> = ({
           initialValue={data && dayjs(data?.date)}
           rules={[{ required: true, message: "გთხოვთ მიუთითოთ თარიღი" }]}
         >
-          <DatePicker className="w-full" />
+          <DatePicker className="w-full" placeholder="თარიღი" />
         </Form.Item>
         <Form.Item className="mt-10">
           <Space

@@ -1,7 +1,6 @@
 "use client";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect } from "react";
-// import Restaurants from "./(pages)/restaurants/page";
 import LognIn from "./(pages)/sign-in/page";
 import { useGlobalContext } from "@/context/global/GlobalContextProvider";
 import { usePathname, useRouter } from "next/navigation";

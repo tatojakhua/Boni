@@ -57,7 +57,7 @@ const CardItem = ({ item, loading }: any) => {
             />,
             <EditOutlined key="edit" onClick={() => editForm()} />,
             isLoading ? (
-              <div className="delete-loader"></div>
+              <div className="delete-loader" />
             ) : (
               <DeleteOutlined
                 key={"delete"}
