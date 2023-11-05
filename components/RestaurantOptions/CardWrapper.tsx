@@ -113,13 +113,15 @@ const CardWrapper = () => {
             onChange={handleSetValues}
             allowClear
             enterButton
-            loading={isLoading || BtnLoading}
+            loading={BtnLoading}
             value={values.searchValue}
+            className="mb-3 mt-9 min-w-[245px] lg:mb-0 lg:mt-0"
           />
           <RangePicker
             placeholder={["დასაწყისი", "დასასრული"]}
             onChange={handleDataRange}
             value={values.dateRange}
+            className="min-w-[245px] mb-6 lg:mb-0"
           />
         </Space>
         <Button
@@ -134,6 +136,7 @@ const CardWrapper = () => {
             borderColor: "white",
             color: "white",
           }}
+          className="hover-button min-w-[245px] lg:min-w-[200px]"
         >
           რესტორნის დამატება
         </Button>
@@ -145,7 +148,9 @@ const CardWrapper = () => {
             style={{
               borderColor: "red",
               color: "red",
+              boxShadow: "rgba(216, 0, 0, 1) 0px 2px 15px",
             }}
+            className="absolute top-3 right-4 lg:relative lg:top-0 lg:right-0"
           />
         </Tooltip>
         <Modal
@@ -167,6 +172,8 @@ const CardWrapper = () => {
           Data.map((item: any) => (
             <CardItem key={item.id} item={item} loading={isLoading} />
           ))
+        ) : isLoading ? (
+          <div className="custom-loader mt-10" />
         ) : (
           <Empty description="ინფორმაცია ცარიელია" />
         )}

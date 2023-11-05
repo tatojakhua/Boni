@@ -80,7 +80,7 @@ const RestaurantForm: React.FC<SetOpenModal> = ({
             { required: true, message: "გთხოვთ მიუთითოთ რესტორნის სახელი!" },
           ]}
         >
-          <Input />
+          <Input placeholder="რესტორნის სახელი" />
         </Form.Item>
 
         <Form.Item<FieldType>
@@ -91,7 +91,7 @@ const RestaurantForm: React.FC<SetOpenModal> = ({
             { required: true, message: "გთხოვთ მიუთითოთ შ.პ.ს სახელწოდება!" },
           ]}
         >
-          <Input />
+          <Input placeholder="შ.პ.ს სახელწოდება" />
         </Form.Item>
 
         <Form.Item<FieldType>
@@ -100,7 +100,7 @@ const RestaurantForm: React.FC<SetOpenModal> = ({
           initialValue={item?.city}
           rules={[{ required: true, message: "გთხოვთ მიუთითოთ ქალაქი!" }]}
         >
-          <Input />
+          <Input placeholder="ქალაქი" />
         </Form.Item>
         <Form.Item<FieldType>
           label="ყუთების რაოდენობა"
@@ -110,7 +110,7 @@ const RestaurantForm: React.FC<SetOpenModal> = ({
             { required: true, message: "გთხოვთ მიუთითოთ ყუთების რაოდენობა!" },
           ]}
         >
-          <Input type="number" min={1} />
+          <Input type="number" min={1} placeholder="ყუთების რაოდენობა" />
         </Form.Item>
 
         <Form.Item className="mt-10">

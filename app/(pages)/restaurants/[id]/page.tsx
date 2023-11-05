@@ -26,6 +26,7 @@ const Page = () => {
             borderColor: "white",
             color: "white",
           }}
+          className="hover-button"
         >
           უკან დაბრუნება
         </Button>
@@ -42,6 +43,7 @@ const Page = () => {
             borderColor: "white",
             color: "white",
           }}
+          className="hover-button"
         >
           დამატება
         </Button>
