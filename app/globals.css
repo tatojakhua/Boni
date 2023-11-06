@@ -1,0 +1,165 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+label[for="username"],
+label[for="password"],
+label[for="username"]::placeholder {
+  color: white !important;
+  font-weight: 600 !important;
+  margin-top: 1.5rem !important;
+}
+input[id="password"],
+input[id="username"],
+input[id="username"]::placeholder,
+input[id="password"]::placeholder {
+  background-color: transparent !important;
+  color: white !important;
+  background: transparent !important;
+  font-weight: 600 !important;
+}
+.anticon-eye,
+.anticon-eye-invisible {
+  color: white !important;
+}
+
+.ant-pagination-prev,
+.ant-pagination-next,
+.ant-pagination-item {
+  background-color: transparent !important;
+  font-weight: 800 !important;
+}
+.ant-pagination span,
+.ant-pagination-item a {
+  color: white !important;
+  font-weight: 800 !important;
+  font-size: 15px !important;
+}
+.ant-pagination-item-active {
+  background-color: none !important;
+  border: 2px solid !important;
+  border-color: #1677ff !important;
+}
+.ant-table-row {
+  font-weight: 600 !important;
+  color: white !important;
+}
+.ant-input-wrapper input,
+.ant-input-wrapper span,
+.ant-picker-range {
+  color: white !important;
+  background-color: transparent !important;
+  font-weight: 500 !important;
+}
+.ant-input-search-button,
+.ant-input-wrapper input:hover,
+.ant-picker-range:hover {
+  border-color: #1677ff !important;
+}
+
+.ant-input-search-button {
+  background-color: #1677ff !important;
+  border-color: #1677ff !important;
+}
+
+.ant-input-wrapper input::placeholder,
+.ant-picker-range input::placeholder,
+.ant-picker-range input,
+.ant-picker-separator,
+.ant-picker-suffix {
+  color: white !important;
+  font-weight: 500 !important;
+}
+.ant-card-actions {
+  background: none !important;
+  border-top: none !important;
+}
+.ant-card-actions li {
+  border-inline-end: none !important;
+}
+
+.ant-card-actions li span,
+.ant-card-meta-title,
+.ant-card-meta-description {
+  color: white !important;
+}
+.ant-card-actions li:nth-child(1) span:hover {
+  color: #1677ff !important;
+}
+
+.ant-card-actions li:nth-child(2) span:hover {
+  color: yellow !important;
+}
+
+.ant-card-actions li:nth-child(3) span:hover {
+  color: red !important;
+}
+.ant-message-notice-content {
+  color: white;
+  background-color: rgba(51, 51, 51, 1) !important;
+}
+.ant-table-cell,
+.ant-table-tbody {
+  color: white !important;
+  background-color: rgba(51, 51, 51, 1) !important;
+}
+.ant-empty-description {
+  color: white !important;
+  font-size: 1.5rem !important;
+  line-height: 2rem !important;
+}
+.hover-button:hover {
+  border-color: #1677ff !important;
+  color: #1677ff !important;
+}
+.ant-modal-content {
+  background-color: #0f0f0f !important;
+}
+.ant-modal-header,
+.ant-select-selector,
+.ant-form-item-control-input-content input,
+.ant-picker {
+  background: transparent !important;
+}
+.ant-modal-title,
+.ant-modal-close-x,
+.ant-form-item-label label,
+.ant-select-selector,
+.ant-form-item-control-input-content input,
+.ant-form-item-control-input-content input::placeholder,
+.ant-select-selection-placeholder {
+  color: white !important;
+}
+.delete-loader {
+  margin-left: 33px;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: radial-gradient(farthest-side, #e11d076c 94%, #0000) top/8px 8px
+      no-repeat,
+    conic-gradient(#0000 30%, #d31601);
+  -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 8px), #000 0);
+  animation: s3 1s infinite linear;
+}
+
+@keyframes s3 {
+  100% {
+    transform: rotate(1turn);
+  }
+}
+.custom-loader {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: radial-gradient(farthest-side, #1677ff 94%, #0000) top/16px 16px
+      no-repeat,
+    conic-gradient(#0000 30%, #1677ff);
+  -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 16px), #000 0);
+  animation: s3 0.5s infinite linear;
+}
+
+@keyframes s3 {
+  100% {
+    transform: rotate(1turn);
+  }
+}
