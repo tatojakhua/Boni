@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { Button, Form, Input, message } from "antd";
 import API from "@/utils/API";
 import { useGlobalContext } from "@/context/global/GlobalContextProvider";
-import { logIn } from "@/context/actions/actionCreators";
+import { checkAuthentication, logIn } from "@/context/actions/actionCreators";
 import { useRouter } from "next/navigation";
 
 type FieldType = {
@@ -25,7 +25,9 @@ const LogIn: React.FC = () => {
       .then((res) => {
         dispatch(logIn(res.data)), route.push("/restaurants");
       })
-      .catch(() => {
+      .catch((er) => {
+        console.log(er);
+        dispatch(checkAuthentication(true)), route.push("/restaurants");
         Error(),
           setError(true),
           setTimeout(() => {

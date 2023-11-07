@@ -15,7 +15,7 @@ export default function Home({ children }: any) {
     } else {
       router.push(pathname);
     }
-    if (!pathname || state.isAuthenticated) {
+    if (!pathname || (pathname.includes("sign-in") && state.isAuthenticated)) {
       router.push("/restaurants");
     }
   }, [state.apiCallRefresh, state.isAuthenticated]);
